@@ -19,40 +19,40 @@
             <div class="col-lg-3 col-sm-4 ">
 
                 <div class="search-form"><h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-                   <form action="" method="POST">
+                   <form action="{{route('search')}}" method="GET">
                        @csrf
-                       <input type="text" class="form-control" placeholder="Search of Properties">
+                       <input type="text" name="address" class="form-control" placeholder="Search of Properties">
                        <div class="row">
-
                            <div class="col-lg-5">
-                               <select class="form-control">
-                                   <option>Buy</option>
-                                   <option>Rent</option>
-                               </select>
+                           <select id="for" name="for" class="form-control">
+                                 <option>for what</option>
+                                 <option value="sale" >Buy</option>
+                                 <option value="rent">Rent</option>
+                             </select>
                            </div>
 
                            <div class="col-lg-7">
-                               <select class="form-control">
-                                   <option>Price</option>
-                                   <option>$150,000 - $200,000</option>
-                                   <option>$200,000 - $250,000</option>
-                                   <option>$250,000 - $300,000</option>
-                                   <option>$300,000 - above</option>
-                               </select>
+                           <select id="price" name="price" class="form-control">
+                                 <option>Price</option>
+                                 <option value="100000"> less than $50,000</option>
+                                 <option value="50000">less than $30,000</option>
+                                 <option value="30000">less than $15,000</option>
+                                 <option value="15000">less than $5000</option>
+                             </select>
                            </div>
 
                        </div>
 
                        <div class="row">
                            <div class="col-lg-12">
-                               <select class="form-control">
-                                   <option>Property Type</option>
-                                   <option>Apartment</option>
-                                   <option>Office Space</option>
-                               </select>
+                           <select id="type" name="type" class="form-control">
+                                 <option>type</option>
+                                 <option value="appartment">Apartment</option>
+                                 <option value="sallon" >Office Space</option>
+                             </select>
                            </div>
                        </div>
-                       <button class="btn btn-primary">Find Now</button>
+                       <button class="btn btn-primary" onclick="window.location.href='{{route('search')}}'">Find Now</button>
                    </form>
                 </div>
 
@@ -75,7 +75,7 @@
 
             <div class="col-lg-9 col-sm-8">
                 <div class="sortby clearfix">
-                    <div class="pull-left result">Showing: {{count($AllUnits)}} </div>
+                    <div class="pull-left result">Showing: {{count($Result)}} </div>
                     <form method="GET" action="{{route('sortData')}}" class="pull-right">
                         <label>
                             <input type="radio" name="sort" value="asc"  {{ isset($by) && $by =='asc'  ? 'checked' : '' }}>
