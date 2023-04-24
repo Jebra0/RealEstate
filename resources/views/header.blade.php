@@ -51,15 +51,15 @@
 
 
             <!-- Nav Starts -->
-            <div class="navbar-collapse  collapse">
-              <ul class="nav navbar-nav navbar-right">
-               <li class="active"><a href="{{route('index')}}">Home</a></li>
-                <li><a href="{{route('about')}}">About</a></li>
-                <li><a href="{{route('agents')}}">Agents</a></li>
-                <li><a href="{{route('blog')}}">Blog</a></li>
-                <li><a href="{{route('contact')}}">Contact</a></li>
-              </ul>
-            </div>
+              <div class="navbar-collapse  collapse">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{route('index')}}">Home</a></li>
+                      <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{route('about')}}">About</a></li>
+                      <li class="{{ Request::is('agents') ? 'active' : '' }}"><a href="{{route('agents')}}">Agents</a></li>
+{{--                      <li class="{{ Request::is('blog') ? 'active' : '' }}"><a href="{{route('blog')}}">Blog</a></li>--}}
+                      <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{route('contact')}}">Contact</a></li>
+                  </ul>
+              </div>
             <!-- #Nav Ends -->
 
           </div>
@@ -84,7 +84,7 @@
                     <ul class="dropdown-menu m-0" aria-labelledby="dropdownMenu1">
                         <li><a href="{{route('profile.edit')}}"> {{ __('Profile') }}</a></li>
                         <li><a href="{{route('buysalerent')}}">Buy</a></li>
-                        <li><a href="{{route('buysalerent')}}">Sale / Rent</a></li>
+                        <li><a href="{{route('salerent')}}">Sale / Rent</a></li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <li><a style="color: black; margin-left: 19px;" href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();"> {{ __('Log Out') }}</a></li>

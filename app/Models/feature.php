@@ -18,8 +18,4 @@ class feature extends Model
     protected $casts = [
         'furniture' => 'array',
     ];
-//
-//    public function feature(){
-//        return $this->belongsTo(Unit::class, 'feature_id');
-//    }
 }

@@ -8,7 +8,6 @@
                <ul class="row">
             <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{{route('about')}}">About</a></li>
             <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{{route('agents')}}">Agents</a></li>
-            <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{{route('blog')}}">Blog</a></li>
             <li class="col-lg-12 col-sm-12 col-xs-3"><a href="{{route('contact')}}">Contact</a></li>
           </ul>
         </div>

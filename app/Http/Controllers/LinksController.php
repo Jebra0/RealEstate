@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use Database\Factories\FeatureFactory;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -11,10 +12,8 @@ class LinksController extends Controller
     public function index()
     {
         $units = Unit::all();
-        // return $unit;
         return view('index', compact('units'));
     }
-
     public function about()
     {
         return view('about');
@@ -23,10 +22,31 @@ class LinksController extends Controller
     {
         return view('agents');
     }
-
-    public function blog()
+    public function salerent(Request $request)
     {
-        return view('blog');
+//        //to insert u have 2 way : first using new keyword
+//        $furniture = new FeatureFactory;
+//        $furniture->air_condition = $request->has('air_condition');
+//        $furniture->central_heating = $request->has('central_heating');
+//        //$furniture->furniture = $request->furniture;
+//        $furniture->save();
+//
+//        $unit = new Unit;
+//        $unit->description = $request->description;
+//        $unit->price = $request->price;
+//        $unit->type = $request->type;
+//        $unit->for_what = $request->for;
+//        $unit->image = $request->image;
+//        $unit->imag = [
+//            $request->components1,
+//            $request->components2,
+//            $request->components3,
+//            $request->components4,
+//        ];
+//        $unit->feature_id = $furniture->id;
+//        $unit->save();
+
+        return view('salerent');
     }
     public function contact()
     {
@@ -66,7 +86,7 @@ class LinksController extends Controller
             ->orwhere('type', $type)
             ->orwhere('address', 'like', '%' . $address . '%')
             ->paginate(15);
-        
+
             return view('buysalerent', compact(
                 'units',
                 'AllUnits',
