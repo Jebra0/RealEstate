@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Smart</title>
     <meta charset="UTF-8" />
+    <title>{{$title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/style.css"/>
@@ -56,7 +56,6 @@
                       <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{route('index')}}">Home</a></li>
                       <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{route('about')}}">About</a></li>
                       <li class="{{ Request::is('agents') ? 'active' : '' }}"><a href="{{route('agents')}}">Agents</a></li>
-{{--                      <li class="{{ Request::is('blog') ? 'active' : '' }}"><a href="{{route('blog')}}">Blog</a></li>--}}
                       <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="{{route('contact')}}">Contact</a></li>
                   </ul>
               </div>

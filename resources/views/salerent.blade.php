@@ -11,8 +11,9 @@
 <div class="container " >
     <div class="spacer " >
         <div class="row" style="margin: 10px;">
-            <form method="post" action="{{route('salerent')}}">
-                <div class="form-group input-group-lg">
+            <form method="POST" action="{{route('ubload')}}" enctype="multipart/form-data">
+                @csrf
+                {{--<div class="form-group input-group-lg">
                     <label for="description">Description:</label>
                     <input type="text" class="form-control" id="description" name="description" required>
                 </div>
@@ -44,14 +45,15 @@
                         <option value="rent">Rent</option>
                     </select>
                 </div>
+--}}
                 <label>Unit Images: </label>
                 <div class="col-md-4 input-group">
-                    <input class=" form-control" type="text"/>
-                    <div class="input-group-btn">
-                        <label for="files" class="btn btn-default">browse</label>
-                        <input name="image" id="files" type="file" class="btn btn-default"  style="visibility:hidden;"/>
-                    </div>
+                    <input type="file" id="image" name="image[]" multiple>
+                    @if ($errors->has('image'))
+                           <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                    @endif
                 </div>
+{{--
                 <div class="form-group ">
                     <label for="components">Components:</label>
                     <div class="components">
@@ -88,9 +90,11 @@
                     </div>
                 </div>
 
+ --}}
                     <div style="margin: 30px;">
-                       <button class=" btn btn-success"  onclick="window.location.href='{{route('salerent')}}'">Ubload</button>
+                       <button class=" btn btn-success" >Ubload</button>
                    </div>
+
             </form>
         </div>
     </div>

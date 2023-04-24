@@ -3,27 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Traits\UbloadImagesTrait;
 use Database\Factories\FeatureFactory;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
 class LinksController extends Controller
 {
+    use UbloadImagesTrait;
+
     public function index()
     {
         $units = Unit::all();
-        return view('index', compact('units'));
+        $title = 'Home';
+        return view('index', compact('units', 'title'));
     }
     public function about()
     {
-        return view('about');
+        $title = 'About';
+        return view('about', compact('title'));
     }
     public function agents()
     {
-        return view('agents');
+        $title = 'agents';
+        return view('agents', compact('title'));
     }
-    public function salerent(Request $request)
+    public function salerent()
     {
+
+
 //        //to insert u have 2 way : first using new keyword
 //        $furniture = new FeatureFactory;
 //        $furniture->air_condition = $request->has('air_condition');
@@ -46,14 +54,30 @@ class LinksController extends Controller
 //        $unit->feature_id = $furniture->id;
 //        $unit->save();
 
-        return view('salerent');
+//        if ($request->hasFile('photo')) {
+//            $image = $request->file('photo')->getClientOriginalName();
+//            $path = $request->file('photo')->storeAs('Units', $image, 'AllImages');
+//        }
+
+
+        $title = 'Sale Or Rent';
+        return view('salerent', compact('title'));
     }
+
+    public function ubload(Request $request){
+        $this->UbloadImage($request, 'Units');
+
+        return redirect('/salerent');
+    }
+
     public function contact()
     {
-        return view('contact');
+        $title = 'Contact';
+        return view('contact', compact('title'));
     }
     public function buysalerent(Request $request)
     {
+        $title = 'Buy Or Rent';
         $units = Unit::orderBy('price', 'asc')->limit(5)->get();
         $AllUnits = Unit::all();
         $Result = Unit::paginate(15);
@@ -62,7 +86,8 @@ class LinksController extends Controller
             'units',
             'AllUnits',
             'Result',
-            'by'
+            'by',
+            'title',
         ));
     }
     public function search(Request $request)
@@ -110,7 +135,9 @@ class LinksController extends Controller
     }
     public function property_detail()
     {
+        $title = 'Prosperity Details';
         $units = Unit::orderBy('price', 'asc')->limit(5)->get();
-        return view('property-detail', compact('units'));
+        return view('property-detail', compact('units', compact('title')));
     }
+
 }

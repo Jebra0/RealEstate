@@ -12,10 +12,9 @@ class feature extends Model
     protected $fillable = [
         'air_condition',
         'central_heating',
-        'furniture',
-    ];
-
-    protected $casts = [
-        'furniture' => 'array',
+        'bedrooms',
+        'living_rooms',
+        'bathroom',
+        'kitchen',
     ];
 }

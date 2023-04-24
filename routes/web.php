@@ -25,7 +25,8 @@ Route::controller(LinksController::class)->group(function() {
     Route::Get('/search', 'search')->name('search');
     Route::get('/blogdetail', 'blogdetail')->name('blogdetail');
     Route::get('/propertydetail', 'property_detail')->name('propertydetail');
-    Route::get('/salerent', 'salerent')->name('salerent');
+    Route::any('/salerent', 'salerent')->name('salerent');
+    Route::any('/salerent/ubload', 'ubload')->name('ubload');
 });
 
 require __DIR__.'/auth.php';

@@ -12,18 +12,14 @@ class Unit extends Model
 
     protected $fillable = [
         'description',
-        'address',
         'price',
         'type',
         'for_what',
         'date_of_posting',
         'is_available',
-        'imag',
-        'components',
     ];
 
     protected $casts = [
-        'imag' => 'array',
         'components' => 'array',
     ];
 

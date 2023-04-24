@@ -11,13 +11,12 @@ class FeatureFactory extends Factory
         return [
             'air_condition' => fake()->boolean(),
             'central_heating' => fake()->boolean(),
-            'furniture' => [
-                fake()->name ,
-                fake()->name ,
-                fake()->name ,
-                fake()->name ,
-                fake()->name ,
-            ],
+            'bedrooms' => fake()->numberBetween(0, 4),
+            'living_rooms' => fake()->numberBetween(0, 4),
+            'bathroom' => fake()->numberBetween(0, 4),
+            'kitchen' => fake()->numberBetween(0, 4),
+            'unit_id' => fake()->numberBetween($min = 1, $max = 500),
+
         ];
     }
 }

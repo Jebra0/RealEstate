@@ -1,5 +1,4 @@
 @include('header')
-
 <div>
       <div id="slider" class="sl-slider-wrapper">
 
@@ -84,7 +83,6 @@
   </div>
 </div>
 
-
 <!-- banner -->
 <div class="container">
   <div class="properties-listing spacer"> <a href="{{route('buysalerent')}}" class="pull-right viewall">View All Listing</a>
@@ -121,4 +119,5 @@
     </div>
   </div>
 </div>
+
 @include('footer')
