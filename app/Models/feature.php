@@ -17,4 +17,9 @@ class feature extends Model
         'bathroom',
         'kitchen',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
+    }
 }

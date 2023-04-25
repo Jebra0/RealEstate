@@ -17,4 +17,9 @@ class Image extends Model
     protected $casts = [
         'imag' => 'array',
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

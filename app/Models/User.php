@@ -29,7 +29,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-//    public function user(){
-//        return $this->belongsTo(Unit::class, 'posted_by');
-//    }
+    public function units()
+    {
+        return $this->hasMany(Unit::class, 'posted_by');
+    }
 }

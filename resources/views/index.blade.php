@@ -5,15 +5,15 @@
         <div class="sl-slider">
               @php $count = 0; @endphp
               @foreach($units as $unit)
-                  @if($count >= 4 )
+                  @if($count >= 5 )
                     @break
                   @endif
                       <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                           <div class="sl-slide-inner">
                               <div class="bg-img bg-img-1"></div>
-                              <h2><a href="{{route('propertydetail', $unit->id)}}">{{ $unit->components[0] . " " . $unit->components[1] . " " . $unit->components[2] . " " . $unit->components[3]  }}</a></h2>
+                              <h2><a href="{{route('propertydetail', $unit->id)}}">{{ $unit->feature->bedrooms . " Bedrooms " . $unit->feature->living_rooms . " Living Room " . $unit->feature->bathroom . "  Bathroom " . $unit->feature->kitchen ." kitchen"  }}</a></h2>
                               <blockquote>
-                                  <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{$unit->address}}</p>
+                                  <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</p>
                                   <p>{{$unit->date_of_posting}}</p>
                                   <cite>$ {{$unit->price}} </cite>
                               </blockquote>
@@ -64,13 +64,20 @@
                              <select id="type" name="type" class="form-control">
                                  <option>type</option>
                                  <option value="appartment">Apartment</option>
-                                 <option value="sallon" >Office Space</option>
+                                 <option value="sallon" >Salon</option>
+                                 <option value="sallon" >Home</option>
                              </select>
                          </div>
                      </div>
                      <div class="row">
-                         <div class="col-lg-9 col-sm-9 ">
-                             <input name="address" type="text" class="form-control" placeholder="Address">
+                         <div class="col-lg-3 col-sm-3 ">
+                             <input name="state" type="text" class="form-control" placeholder="State Name">
+                         </div>
+                         <div class="col-lg-3 col-sm-3 ">
+                             <input name="city" type="text" class="form-control" placeholder="City Name">
+                         </div>
+                         <div class="col-lg-3 col-sm-3 ">
+                             <input name="name" type="text" class="form-control" placeholder="Property Name">
                          </div>
                          <div class="  col-lg-3 col-sm-3 ">
                              <button class=" btn btn-success"  onclick="window.location.href='{{route('search')}}'">Find Now</button>
@@ -82,7 +89,7 @@
     </div>
   </div>
 </div>
-
+{{--
 <!-- banner -->
 <div class="container">
   <div class="properties-listing spacer"> <a href="{{route('buysalerent')}}" class="pull-right viewall">View All Listing</a>
@@ -119,5 +126,8 @@
     </div>
   </div>
 </div>
+
+
+--}}
 
 @include('footer')

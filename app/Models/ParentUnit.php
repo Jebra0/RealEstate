@@ -18,4 +18,9 @@ class ParentUnit extends Model
         'city_name' ,
         'state_name' ,
     ];
+
+    public function units()
+    {
+        return $this->hasMany(Unit::class, 'parent_unit_id', 'id');
+    }
 }

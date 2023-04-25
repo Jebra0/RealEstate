@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\feature;
+use App\Models\ParentUnit;
 use App\Models\Unit;
 use App\Traits\UbloadImagesTrait;
 use Database\Factories\FeatureFactory;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use function Symfony\Component\String\u;
 
 class LinksController extends Controller
 {
@@ -14,8 +17,10 @@ class LinksController extends Controller
 
     public function index()
     {
-        $units = Unit::all();
-        $title = 'Home';
+        // get all images and the feature of it , user , parent
+        $units = Unit::with('images', 'feature', 'user', 'parent')->limit(20)->get();
+        //return $units;
+      $title = 'Home';
         return view('index', compact('units', 'title'));
     }
     public function about()
@@ -98,18 +103,23 @@ class LinksController extends Controller
 //################################################################################################
 
         $units = Unit::orderBy('price', 'asc')->limit(5)->get();
-        $AllUnits = Unit::all();
+        $AllUnits = Unit::count();
         $by = 'asc';
+
 
         $for = $request->input('for');
         $price = $request->input('price');
         $type = $request->input('type');
-        $address = $request->input('address');
+        $state = $request->input('state');
+        $city = $request->input('city');
+        $name = $request->input('name');
 
         $Result = Unit::where('for_what', $for)
             ->orwhere('price', '<=', $price)
             ->orwhere('type', $type)
-            ->orwhere('address', 'like', '%' . $address . '%')
+            ->orwhere('address', 'like', '%' . $state . '%')
+            ->orwhere('address', 'like', '%' . $city . '%')
+            ->orwhere('address', 'like', '%' . $name . '%')
             ->paginate(15);
 
             return view('buysalerent', compact(
