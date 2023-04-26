@@ -20,7 +20,7 @@ class LinksController extends Controller
         // get all images and the feature of it , user , parent
         $units = Unit::with('images', 'feature', 'user', 'parent')->limit(20)->get();
         //return $units;
-      $title = 'Home';
+        $title = 'Home';
         return view('index', compact('units', 'title'));
     }
     public function about()
@@ -82,10 +82,11 @@ class LinksController extends Controller
     }
     public function buysalerent(Request $request)
     {
+
         $title = 'Buy Or Rent';
-        $units = Unit::orderBy('price', 'asc')->limit(5)->get();
-        $AllUnits = Unit::all();
-        $Result = Unit::paginate(15);
+        $units =  Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
+        $AllUnits = Unit::count();
+        $Result = Unit::with('images', 'feature', 'user', 'parent')->paginate(15);
         $by = 'asc';
         return view('buysalerent', compact(
             'units',
@@ -102,10 +103,9 @@ class LinksController extends Controller
 //##########################       :) تعديل : خلاص السيرش حلو           ###########################
 //################################################################################################
 
-        $units = Unit::orderBy('price', 'asc')->limit(5)->get();
+        $units =  Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
         $AllUnits = Unit::count();
         $by = 'asc';
-
 
         $for = $request->input('for');
         $price = $request->input('price');
@@ -114,31 +114,35 @@ class LinksController extends Controller
         $city = $request->input('city');
         $name = $request->input('name');
 
-        $Result = Unit::where('for_what', $for)
-            ->orwhere('price', '<=', $price)
+        $Result = Unit::with('images', 'feature', 'user', 'parent')->where('for_what', $for)
+            ->where('price', '<=', $price)
             ->orwhere('type', $type)
-            ->orwhere('address', 'like', '%' . $state . '%')
-            ->orwhere('address', 'like', '%' . $city . '%')
-            ->orwhere('address', 'like', '%' . $name . '%')
+            ->orWhereHas('parent', function ($query) use ($state, $city, $name) {
+                $query->where('state_name', 'like', '%' . $state . '%')
+                    ->where('city_name', 'like', '%' . $city . '%')
+                    ->where('parent_name', 'like', '%' . $name . '%');
+            })
             ->paginate(15);
+
+            $title = 'Buy Or Rent ';
 
             return view('buysalerent', compact(
                 'units',
                 'AllUnits',
                 'Result',
                 'by',
+                'title',
             ));
     }
-
     public function sortData(Request $request)
     {
+        $title = 'Buy Or Rent';
         $by = $request->input('sort', 'asc');
-        $units = Unit::orderBy('price', 'asc')->limit(5)->get();
-        $AllUnits = Unit::all();
-        $Result = Unit::orderBy('price', $by)->paginate(15);
-        return view('buysalerent', compact('Result', 'units', 'AllUnits', 'by'));
+        $units = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
+        $AllUnits = Unit::count();
+        $Result = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', $by)->paginate(15);
+        return view('buysalerent', compact('Result', 'units', 'AllUnits', 'by', 'title'));
     }
-
     public function blogdetail()
     {
         return view('blogdetail');
@@ -146,8 +150,8 @@ class LinksController extends Controller
     public function property_detail()
     {
         $title = 'Prosperity Details';
-        $units = Unit::orderBy('price', 'asc')->limit(5)->get();
-        return view('property-detail', compact('units', compact('title')));
+        $units = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
+       return view('property-detail', compact('units', 'title'));
     }
 
 }

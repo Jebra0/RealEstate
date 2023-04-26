@@ -35,7 +35,7 @@ class Unit extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Image::class, 'unit_id');
     }
 
     public function feature()

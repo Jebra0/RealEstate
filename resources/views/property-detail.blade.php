@@ -19,10 +19,10 @@
                     @foreach($units as $unit )
                         <div class="row">
                             <div class="col-lg-4 col-sm-5">
-                                <img src="{{$unit->imag[0]}}" class="img-responsive img-circle" alt="properties"/>
+                                <img src="{{$unit->images->first()->imag ?? 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' }}" class="img-responsive img-circle" alt="properties"/>
                             </div>
                             <div class="col-lg-8 col-sm-7">
-                                <h5><a href="{{route('propertydetail', $unit->id)}}">{{$unit->address}}</a></h5>
+                                <h5><a href="{{route('propertydetail', $unit->id)}}">{{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</a></h5>
                                 <p class="price">${{$unit->price}}</p>
                             </div>
                         </div>
@@ -51,17 +51,17 @@
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators hidden-xs">
-                                    @for($i=0; $i<sizeof($currentUnit->imag); $i++)
+                                    @for($i=0; $i<count($currentUnit->images); $i++)
                                          <li data-target="#myCarousel" data-slide-to="{{$i}}" class="@if($i == 1 ) {{$active}} @endif "></li>
                                     @endfor
                                 </ol>
                                 <div class="carousel-inner">
                                     <!-- Item 1 -->
-                                      @for($i=0; $i<sizeof($currentUnit->imag); $i++)
-                                        <div class="item @if($i == 1 ) {{$active}} @endif">
-                                            <img src="{{$unit->imag[$i]}}" class="properties" alt="properties">
+                                    @for($i = 0; $i < count($currentUnit->images); $i++)
+                                        <div class="item @if($i == 0) {{$active}} @endif">
+                                            <img src="{{asset($currentUnit->images[$i]->imag)}}" class="properties" alt="properties">
                                         </div>
-                                      @endfor
+                                    @endfor
                                     <!-- #Item 1 -->
                                 </div>
                                 <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
@@ -73,7 +73,7 @@
 
                         <div class="spacer"><h4><span class="glyphicon glyphicon-th-list"></span> Properties Detail</h4>
                             <p>{{$currentUnit->description}}</p>
-                            <p>{{$currentUnit->type . " ".implode(' & ', $currentUnit->components). " for " .$currentUnit->for_what . " posted in : " . $currentUnit->date_of_posting}}</p>
+                            <p>{{$currentUnit->type . " ". $currentUnit->feature->bedrooms . " Bedroom " . $currentUnit->feature->living_rooms . " living Room ". $currentUnit->feature->kitchen . " kitchen " ." for " .$currentUnit->for_what . " posted in : " . $currentUnit->date_of_posting}}</p>
                         </div>
 {{--################################################################################
 #### still the location
@@ -92,7 +92,7 @@
                         <div class="col-lg-12  col-sm-6">
                             <div class="property-info">
                                 <p class="price">$ {{$currentUnit->price}}</p>
-                                <p class="area"><span class="glyphicon glyphicon-map-marker"></span> {{$currentUnit->address}}</p>
+                                <p class="area"><span class="glyphicon glyphicon-map-marker"></span> {{$currentUnit->parent->state_name . " " . $currentUnit->parent->city_name . " " . $currentUnit->parent->street_name . " " . $currentUnit->parent->parent_name . " "}}</p>
                                 <div class="profile">
                                     <span class="glyphicon glyphicon-user"></span> Posted By
                                     <p>{{$postedBy->name}}<br>{{$postedBy->number}}</p>
@@ -100,7 +100,7 @@
                             </div>
 
                             <h6><span class="glyphicon glyphicon-home"></span> Availabilty</h6>
-                            <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ substr($currentUnit->components[0], 0, 1)}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{substr($currentUnit->components[1], 0, 1) }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{substr($currentUnit->components[2], 0, 1) }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{substr($currentUnit->components[3], 0, 1) }}</span> </div>
+                            <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $currentUnit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$currentUnit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $currentUnit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$currentUnit->feature->kitchen }}</span> </div>
                         </div>
                         <div class="col-lg-12 col-sm-6 ">
                             <div class="enquiry ">

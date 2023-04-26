@@ -1,7 +1,5 @@
 @include('header')
-@php
-//this badge going to be used for the result of searching and to view all units search and view all
-@endphp
+
 <!-- banner -->
 <div class="inside-banner">
     <div class="container">
@@ -10,7 +8,6 @@
     </div>
 </div>
 <!-- banner -->
-
 
 <div class="container">
     <div class="properties-listing spacer">
@@ -21,7 +18,9 @@
                 <div class="search-form"><h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
                    <form action="{{route('search')}}" method="GET">
                        @csrf
-                       <input type="text" name="address" class="form-control" placeholder="Search of Properties">
+                       <input name="state" type="text" class="form-control" placeholder="State Name">
+                       <input name="city" type="text" class="form-control" placeholder="City Name">
+                       <input name="name" type="text" class="form-control" placeholder="Property Name">
                        <div class="row">
                            <div class="col-lg-5">
                            <select id="for" name="for" class="form-control">
@@ -49,22 +48,22 @@
                                  <option>type</option>
                                  <option value="appartment">Apartment</option>
                                  <option value="sallon" >Office Space</option>
+                                 <option value="home" >Home</option>
                              </select>
                            </div>
                        </div>
                        <button class="btn btn-primary" onclick="window.location.href='{{route('search')}}'">Find Now</button>
                    </form>
                 </div>
-
                 <div class="hot-properties hidden-xs">
                     <h4>Hot Properties</h4> {{-- the cheapest apartments --}}
                     @foreach($units as $unit )
                         <div class="row">
                             <div class="col-lg-4 col-sm-5">
-                                <img src="{{$unit->imag[0]}}" class="img-responsive img-circle" alt="properties"/>
+                                <img src="{{$unit->images->first()->imag ?? 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}}"   class="img-responsive img-circle" alt="properties"/>
                             </div>
                             <div class="col-lg-8 col-sm-7">
-                                <h5><a href="{{route('propertydetail', $unit->id)}}">{{$unit->address}}</a></h5>
+                                <h5><a href="{{route('propertydetail', $unit->id)}}">{{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</a></h5>
                                 <p class="price">${{$unit->price}}</p>
                             </div>
                         </div>
@@ -103,7 +102,7 @@
                             @endif
                             <div class="col-lg-4 col-sm-6">
                                 <div class="properties">
-                                    <div class="image-holder"><img src="{{ $unit->imag[1] }}" class="img-responsive" alt="properties"/>
+                                    <div class="image-holder"><img src="{{$unit->images->first()->imag ?? 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}}" style="width: 274px; height: 205px;"  class="img-responsive" alt="properties"/>
                                         @if ($unit->is_available)
                                             <div class="status sold">Available</div>
                                         @else
@@ -112,7 +111,7 @@
                                     </div>
                                     <h4><a href="{{route('propertydetail')}}">{{$unit->type}}</a></h4>
                                     <p class="price">Price: ${{$unit->price}}</p>
-                                    <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ substr($unit->components[0], 0, 1)}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{substr($unit->components[1], 0, 1) }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{substr($unit->components[2], 0, 1) }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{substr($unit->components[3], 0, 1) }}</span> </div>
+                                    <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $unit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$unit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $unit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$unit->feature->kitchen }}</span> </div>
                                     <a class="btn btn-primary"  href="{{route('propertydetail', $unit->id)}}" >View Details</a>
                                 </div>
                             </div>

@@ -65,7 +65,7 @@
                                  <option>type</option>
                                  <option value="appartment">Apartment</option>
                                  <option value="sallon" >Salon</option>
-                                 <option value="sallon" >Home</option>
+                                 <option value="home" >Home</option>
                              </select>
                          </div>
                      </div>
@@ -89,7 +89,7 @@
     </div>
   </div>
 </div>
-{{--
+
 <!-- banner -->
 <div class="container">
   <div class="properties-listing spacer"> <a href="{{route('buysalerent')}}" class="pull-right viewall">View All Listing</a>
@@ -101,7 +101,7 @@
                 @break
             @endif
             <div class="properties">
-                <div class="image-holder"><img src="{{ $unit->imag[1] }}" class="img-responsive" alt="properties"/>
+                <div class="image-holder"><img src="{{ $unit->images->first()->imag ?? 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' }}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
                     @if ($unit->is_available)
                       <div class="status sold">Available</div>
                     @else
@@ -110,7 +110,7 @@
                 </div>
                 <h4><a href="{{route('propertydetail' , $unit->id)}}">{{$unit->type}}</a></h4>
                 <p class="price">Price: ${{$unit->price}}</p>
-                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ substr($unit->components[0], 0, 1)}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{substr($unit->components[1], 0, 1) }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{substr($unit->components[2], 0, 1) }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{substr($unit->components[3], 0, 1) }}</span> </div>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $unit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$unit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $unit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$unit->feature->kitchen }}</span> </div>
                 <a class="btn btn-primary"  href="{{route('propertydetail', $unit->id)}}" >View Details</a>
             </div>
             @php $count++; @endphp
@@ -127,7 +127,5 @@
   </div>
 </div>
 
-
---}}
 
 @include('footer')
