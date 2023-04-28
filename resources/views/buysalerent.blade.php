@@ -60,7 +60,7 @@
                     @foreach($units as $unit )
                         <div class="row">
                             <div class="col-lg-4 col-sm-5">
-                                <img src="{{$unit->images->first()->imag ?? 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}}"   class="img-responsive img-circle" alt="properties"/>
+                                <img src="{{isset($unit->images->first()->imag )? 'images/'. $unit->images->first()->imag: 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}}"   class="img-responsive img-circle" alt="properties"/>
                             </div>
                             <div class="col-lg-8 col-sm-7">
                                 <h5><a href="{{route('propertydetail', $unit->id)}}">{{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</a></h5>
@@ -102,7 +102,7 @@
                             @endif
                             <div class="col-lg-4 col-sm-6">
                                 <div class="properties">
-                                    <div class="image-holder"><img src="{{$unit->images->first()->imag ?? 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}}" style="width: 274px; height: 205px;"  class="img-responsive" alt="properties"/>
+                                    <div class="image-holder"><img src="{{isset($unit->images->first()->imag) ?'images/'.$unit->images->first()->imag: 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}}" style="width: 274px; height: 205px;"  class="img-responsive" alt="properties"/>
                                         @if ($unit->is_available)
                                             <div class="status sold">Available</div>
                                         @else

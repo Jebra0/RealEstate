@@ -15,7 +15,7 @@ class Image extends Model
     ];
 
     protected $casts = [
-        'imag' => 'array',
+        'imag' => 'string'
     ];
 
     public function unit()

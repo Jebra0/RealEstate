@@ -11,15 +11,16 @@ trait UbloadImagesTrait
 {
     public function UbloadImage(Request $request, $folderName){
         $validator = $request->validate([
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $images = $request->file('image');
         if ($request->hasFile('image')) {
             foreach ($images as $image) {
                 $name = $image->getClientOriginalName();
-                $path = $image->storeAs($folderName, 'UNIT' . $name, 'AllImages');
+                $path[] = $image->storeAs($folderName, 'UNIT' . $name, 'AllImages');
             }
+            return $path;
         }else{
             return redirect()->back()->withErrors($validator)->withInput();
         }

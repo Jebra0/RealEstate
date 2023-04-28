@@ -101,7 +101,7 @@
                 @break
             @endif
             <div class="properties">
-                <div class="image-holder"><img src="{{ $unit->images->first()->imag ?? 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' }}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
+                <div class="image-holder"><img src="{{ isset($unit->images->first()->imag) ? 'images/'.$unit->images->first()->imag :  'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' }}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
                     @if ($unit->is_available)
                       <div class="status sold">Available</div>
                     @else
