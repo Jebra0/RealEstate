@@ -77,7 +77,7 @@
 {{--################################################################################
 #### still the location
 #### still the report btn
-#### still the request btn
+#### still the request btn  {{ ignore this functionality becous it need messaging system  }}
 ####################################################################################
 --}}
                         <div><h4><span class="glyphicon glyphicon-map-marker"></span> Location</h4>
@@ -85,7 +85,6 @@
                                 <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Pulchowk,+Patan,+Central+Region,+Nepal&amp;aq=0&amp;oq=pulch&amp;sll=37.0625,-95.677068&amp;sspn=39.371738,86.572266&amp;ie=UTF8&amp;hq=&amp;hnear=Pulchowk,+Patan+Dhoka,+Patan,+Bagmati,+Central+Region,+Nepal&amp;ll=27.678236,85.316853&amp;spn=0.001347,0.002642&amp;t=m&amp;z=14&amp;output=embed"></iframe>
                             </div>
                         </div>
-                       <center><a class="btn btn-danger" href="#" role="button">Report</a></center>
                     </div>
                     <div class="col-lg-4">
                         <div class="col-lg-12  col-sm-6">
@@ -101,11 +100,45 @@
                             <h6><span class="glyphicon glyphicon-home"></span> Availabilty</h6>
                             <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $currentUnit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$currentUnit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $currentUnit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$currentUnit->feature->kitchen }}</span> </div>
                         </div>
-                        <div class="col-lg-12 col-sm-6 ">
-                            <div class="enquiry ">
-                                <a class="btn btn-success" href="#" role="button">Request</a>
+        {{--
+       ##############################################################################
+       #### Report unit
+       #### IsReported() function is a helper function to check if that user hase alredy report the unit befor or not
+       ##############################################################################
+        --}}
+                        <!-- Button trigger modal -->
+                        @auth()
+                            <button {{ IsReported($currentUnit->id) ? 'disabled' : ''}} type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmReportModal">
+                                Report
+                            </button>
+                        @endauth
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmReportModal" tabindex="-1" role="dialog" aria-labelledby="confirmReportModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmReportModalLabel">Confirm Report</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to report this?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <form method="POST" action="{{ route('report', $currentUnit->id) }}">
+                                            @csrf
+                                            <input type="hidden" name="confirmed" value="true">
+                                            <button type="submit" class="btn btn-danger">Report</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

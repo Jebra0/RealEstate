@@ -33,4 +33,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Unit::class, 'posted_by');
     }
+
+    public function report (){
+        return $this->hasOne(Report::class, 'user_id');
+    }
 }

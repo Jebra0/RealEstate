@@ -43,5 +43,9 @@ class Unit extends Model
         return $this->hasOne(feature::class, 'unit_id', 'id');
     }
 
+    public function reports(){
+        return $this->hasMany(Report::class, 'unit_id');
+    }
+
     /////////////////////////////////////////////////
 }

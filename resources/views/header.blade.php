@@ -10,8 +10,6 @@
     <script src="{{ asset('assets/bootstrap/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/script.js') }}"></script>
 
-
-
     <!-- Owl stylesheet -->
     <link rel="stylesheet" href="assets/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="assets/owl-carousel/owl.theme.css">

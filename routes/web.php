@@ -27,6 +27,8 @@ Route::controller(LinksController::class)->group(function() {
     Route::get('/propertydetail', 'property_detail')->name('propertydetail');
     Route::any('/salerent', 'salerent')->name('salerent');
     Route::any('/salerent/ubload', 'ubload')->name('ubload');
+    Route::any('/report{id}', 'ReportUnit')->name('report');
+
 });
 
 require __DIR__.'/auth.php';

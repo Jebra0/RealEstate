@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\feature;
 use App\Models\Image;
 use App\Models\ParentUnit;
+use App\Models\Report;
 use App\Models\Unit;
+use App\Models\User;
 use App\Traits\UbloadImagesTrait;
 use Database\Factories\FeatureFactory;
 use Illuminate\Http\Request;
@@ -21,7 +23,6 @@ class LinksController extends Controller
     {
         // get all images and the feature of it , user , parent
         $units = Unit::with('images', 'feature', 'user', 'parent')->limit(20)->get();
-        //return $units;
         $title = 'Home';
         return view('index', compact('units', 'title'));
     }
@@ -187,6 +188,16 @@ class LinksController extends Controller
         $title = 'Prosperity Details';
         $units = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
        return view('property-detail', compact('units', 'title'));
+    }
+
+    public function ReportUnit(Request $request, $id){
+        if($request->confirmed){
+            $report = Report::create([
+                'user_id' => Auth::id(),
+                'unit_id' => $id,
+            ]);
+        }
+        return redirect()->back();
     }
 
 }
