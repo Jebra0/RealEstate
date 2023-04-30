@@ -8,10 +8,13 @@ use App\Models\ParentUnit;
 use App\Models\Report;
 use App\Models\Unit;
 use App\Models\User;
+use App\Notifications\ReportUnit;
 use App\Traits\UbloadImagesTrait;
 use Database\Factories\FeatureFactory;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+//use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\String\u;
 
@@ -197,6 +200,14 @@ class LinksController extends Controller
                 'unit_id' => $id,
             ]);
         }
+        $unit = Unit::with('user')->where('id', $id)->first();
+        $user = $unit->getRelation('user');
+        $author = User::find($user->id);
+
+        $admins = User::where('is_admin', '=', 1)->get();
+
+        Notification::send($admins, new ReportUnit($id, $user->id, Auth::id()));
+        Notification::send($author, new ReportUnit($id, $user->id, Auth::id()));
         return redirect()->back();
     }
 

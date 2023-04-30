@@ -108,9 +108,11 @@
         --}}
                         <!-- Button trigger modal -->
                         @auth()
-                            <button {{ IsReported($currentUnit->id) ? 'disabled' : ''}} type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmReportModal">
-                                Report
-                            </button>
+                            @if($currentUnit->user->id != \Illuminate\Support\Facades\Auth::id())
+                                <button {{ IsReported($currentUnit->id) ? 'disabled' : ''}} type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmReportModal">
+                                    Report
+                                </button>
+                            @endif
                         @endauth
 
 
