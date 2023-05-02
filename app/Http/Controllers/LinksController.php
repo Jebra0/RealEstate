@@ -14,6 +14,7 @@ use Database\Factories\FeatureFactory;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 //use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\String\u;
@@ -140,6 +141,7 @@ class LinksController extends Controller
 //#############################################################################################
 // #########################   :(  ملعون ابو السيرش علي الي عاوزه     ##############################
 //##########################       :) تعديل : خلاص السيرش حلو           ###########################
+//##########################       تعديل :  ملعون ابو السيرش            ###########################
 //################################################################################################
 
         $units =  Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
@@ -186,11 +188,12 @@ class LinksController extends Controller
     {
         return view('blogdetail');
     }
-    public function property_detail()
+    public function property_detail($id)
     {
         $title = 'Prosperity Details';
         $units = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
-       return view('property-detail', compact('units', 'title'));
+        return view('property-detail', compact('units', 'title', 'id'));
+
     }
 
     public function ReportUnit(Request $request, $id){
@@ -209,6 +212,15 @@ class LinksController extends Controller
         Notification::send($admins, new ReportUnit($id, $user->id, Auth::id()));
         Notification::send($author, new ReportUnit($id, $user->id, Auth::id()));
         return redirect()->back();
+    }
+
+    public function displayTheTargitPost($id){
+        $notification = DB::table('notifications')->where('data->unit_id', $id)->pluck('id');
+        DB::table('notifications')->where('id', $notification)->update(['read_at' => now()]);
+
+        $title = 'Report Details';
+        $units = Unit::with('images', 'feature', 'user', 'parent')->where('id', $id)->get();
+        return view('report-detail', compact('id', 'title', 'units'));
     }
 
 }

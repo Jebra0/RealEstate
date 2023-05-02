@@ -9,6 +9,10 @@ function GetUnit($id){
     return  Unit::with('images', 'feature', 'user', 'parent')->where('id', $id)->first();
 }
 
+function GetUser($id){
+    return User::where('id', $id)->first();
+}
+
 function IsReported ($id){
 
     $UserRebortBefor = Report::where('user_id', Auth::id())

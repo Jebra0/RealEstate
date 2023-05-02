@@ -52,7 +52,7 @@
                              </select>
                            </div>
                        </div>
-                       <button class="btn btn-primary" onclick="window.location.href='{{route('search')}}'">Find Now</button>
+                       <button class="btn btn-primary">Find Now</button>
                    </form>
                 </div>
                 <div class="hot-properties hidden-xs">

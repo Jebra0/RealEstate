@@ -39,7 +39,7 @@
 ######################################################################
                 --}}
                 @php
-                    $currentUnit = GetUnit(str_replace('=', '',request()->getQueryString()));
+                    $currentUnit = GetUnit($id);
                     $active = "active";
                 @endphp
                 <h2>@if($currentUnit->is_available) Available @else Not Available @endif</h2>
