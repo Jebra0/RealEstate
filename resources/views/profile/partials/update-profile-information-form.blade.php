@@ -46,6 +46,18 @@
                 </div>
             @endif
         </div>
+{{--it did not update the address and number values --}}
+        <div>
+            <x-input-label for="address" :value="__('Address')" />
+            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $user->address)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+        </div>
+
+        <div>
+            <x-input-label for="number" :value="__('number')" />
+            <x-text-input id="number" name="number" type="text" class="mt-1 block w-full" :value="old('number', $user->number)" required autofocus autocomplete="number" />
+            <x-input-error class="mt-2" :messages="$errors->get('number')" />
+        </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

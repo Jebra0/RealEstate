@@ -50,7 +50,7 @@
                             <p>{{$currentUnit->description}}</p>
                             <p>{{$currentUnit->type . " ". $currentUnit->feature->bedrooms . " Bedroom " . $currentUnit->feature->living_rooms . " living Room ". $currentUnit->feature->kitchen . " kitchen " ." for " .$currentUnit->for_what . " posted in : " . $currentUnit->date_of_posting}}</p>
                         </div>
-                    
+
                     </div>
                     <div class="col-lg-4">
                         <div class="col-lg-12  col-sm-6">
@@ -66,9 +66,13 @@
                             <h6><span class="glyphicon glyphicon-home"></span> Availabilty</h6>
                             <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $currentUnit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$currentUnit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $currentUnit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$currentUnit->feature->kitchen }}</span> </div>
                         </div>
-                    
-                
-
+                        @auth()
+                           @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 1)
+                                <a href="{{ route('sold', $currentUnit->id) }}" type="button" class="btn btn-success">
+                                    Sold
+                                </a>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>

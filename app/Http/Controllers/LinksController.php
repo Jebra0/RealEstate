@@ -120,7 +120,7 @@ class LinksController extends Controller
         $title = 'Contact';
         return view('contact', compact('title'));
     }
-    public function buysalerent(Request $request)
+    public function buysalerent()
     {
 
         $title = 'Buy Or Rent';
@@ -221,6 +221,11 @@ class LinksController extends Controller
         $title = 'Report Details';
         $units = Unit::with('images', 'feature', 'user', 'parent')->where('id', $id)->get();
         return view('report-detail', compact('id', 'title', 'units'));
+    }
+
+    public function sold($id){
+        DB::table('units')->where('id', $id)->update(['is_available' => 0 ]);
+        return redirect()->back();
     }
 
 }

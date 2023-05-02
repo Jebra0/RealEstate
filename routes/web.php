@@ -29,6 +29,7 @@ Route::controller(LinksController::class)->group(function() {
     Route::any('/salerent/ubload', 'ubload')->name('ubload');
     Route::any('/report{id}', 'ReportUnit')->name('report');
     Route::any('/notifications{id}', 'displayTheTargitPost')->name('notification');
+    Route::any('/sold{id}', 'sold')->name('sold');
 
 });
 
