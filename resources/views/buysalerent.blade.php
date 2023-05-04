@@ -109,7 +109,7 @@
                                             <div class="status new">Sold</div>
                                         @endif
                                     </div>
-                                    <h4><a href="{{route('propertydetail')}}">{{$unit->type}}</a></h4>
+                                    <h4><a href="{{route('propertydetail', $unit->id)}}">{{$unit->type}}</a></h4>
                                     <p class="price">Price: ${{$unit->price}}</p>
                                     <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $unit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$unit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $unit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$unit->feature->kitchen }}</span> </div>
                                     <a class="btn btn-primary"  href="{{route('propertydetail', $unit->id)}}" >View Details</a>
