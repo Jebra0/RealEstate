@@ -28,7 +28,6 @@ Route::controller(LinksController::class)->group(function() {
     Route::get('/agents', 'agents')->name('agents');
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/contact', 'contact')->name('contact');
-
     Route::get('/blogdetail', 'blogdetail')->name('blogdetail');
     Route::get('/propertydetail{id}', 'property_detail')->name('propertydetail');
     Route::any('/salerent', 'salerent')->name('salerent');
@@ -37,6 +36,8 @@ Route::controller(LinksController::class)->group(function() {
     Route::any('/notifications{id}', 'displayTheTargitPost')->name('notification');
     Route::any('/sold{id}', 'sold')->name('sold');
     Route::any('/deletUnit{id}', 'delet_unit')->name('delet_unit');
+    Route::any('/update', 'updateUnit')->name('ubdate');
+    Route::any('/show{id}', 'showUnit')->name('show');
 
 });
 

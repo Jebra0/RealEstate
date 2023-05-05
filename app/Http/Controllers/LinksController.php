@@ -172,4 +172,14 @@ class LinksController extends Controller
         return redirect()->route('index')->with('success', 'Unit deleted successfully.');
     }
 
+    public function showUnit($id){
+        $unit = Unit::with('images', 'feature', 'parent')->where('id', $id)->first();
+        //return $unit;
+        $title = 'update unit';
+        return view('update-unit', compact('unit', 'title'));
+    }
+    public function ubdate(Request $request, $id){
+
+    }
+
 }

@@ -55,7 +55,7 @@
                        <li>
                            @auth()
                                @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 1)
-                                   <a href=""   >
+                                   <a href="{{route('show', $currentUnit->id)}}">
                                        Edit the post
                                    </a>
                                @endif
