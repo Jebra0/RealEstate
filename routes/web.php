@@ -36,8 +36,9 @@ Route::controller(LinksController::class)->group(function() {
     Route::any('/notifications{id}', 'displayTheTargitPost')->name('notification');
     Route::any('/sold{id}', 'sold')->name('sold');
     Route::any('/deletUnit{id}', 'delet_unit')->name('delet_unit');
-    Route::any('/update', 'updateUnit')->name('ubdate');
+    Route::any('/update{id}', 'updateUnit')->name('ubdate');
     Route::any('/show{id}', 'showUnit')->name('show');
+    Route::any('/deleteImage{id}', 'delete_image')->name('delete_image');
 
 });
 
