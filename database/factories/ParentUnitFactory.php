@@ -15,7 +15,7 @@ class ParentUnitFactory extends Factory
             'has_elevator' => fake()->boolean(),
             'street_name' => fake()->streetName(),
             'city_name' => fake()->city(),
-            'state_name' => fake()->text(),
+            'state_name' => fake()->city(),
         ];
     }
 }
