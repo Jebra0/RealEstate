@@ -11,11 +11,11 @@
                       <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                           <div class="sl-slide-inner">
                               <div class="bg-img bg-img-1"></div>
-                              <h2><a href="{{route('propertydetail', $unit->id)}}">{{ $unit->feature->bedrooms . " Bedrooms " . $unit->feature->living_rooms . " Living Room " . $unit->feature->bathroom . "  Bathroom " . $unit->feature->kitchen ." kitchen"  }}</a></h2>
+                              <h2><a href="{{route('propertydetail', $unit?->id)}}"{{ $unit?->feature?->bedrooms . " Bedrooms " . $unit?->feature?->living_rooms . " Living Room " . $unit?->feature?->bathroom . "  Bathroom " . $unit?->feature?->kitchen ." kitchen"  }}</a></h2>
                               <blockquote>
-                                  <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</p>
-                                  <p>{{$unit->date_of_posting}}</p>
-                                  <cite>$ {{$unit->price}} </cite>
+                                  <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{$unit?->parent?->state_name . " " . $unit?->parent?->city_name . " " . $unit?->parent?->street_name . " " . $unit?->parent?->parent_name . " "}}</p>
+                                  <p>{{$unit?->date_of_posting}}</p>
+                                  <cite>$ {{$unit?->price}} </cite>
                               </blockquote>
                           </div>
                       </div>
@@ -101,17 +101,17 @@
                 @break
             @endif
             <div class="properties">
-                <div class="image-holder"><img src="{{ isset($unit->images->first()->imag) ? 'images/'.$unit->images->first()->imag :  'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' }}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
-                    @if ($unit->is_available)
+                <div class="image-holder"><img src="{{ isset($unit?->images?->first()->imag) ? 'images/'.$unit?->images?->first()->imag :  'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' }}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
+                    @if ($unit?->is_available)
                       <div class="status sold">Available</div>
                     @else
                       <div class="status new">Sold</div>
                     @endif
                 </div>
-                <h4><a href="{{route('propertydetail' , $unit->id)}}">{{$unit->type}}</a></h4>
-                <p class="price">Price: ${{$unit->price}}</p>
-                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $unit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$unit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $unit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$unit->feature->kitchen }}</span> </div>
-                <a class="btn btn-primary"  href="{{route('propertydetail', $unit->id)}}" >View Details</a>
+                <h4><a href="{{route('propertydetail' , $unit?->id)}}">{{$unit?->type}}</a></h4>
+                <p class="price">Price: ${{$unit?->price}}</p>
+                <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $unit?->feature?->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$unit?->feature?->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $unit?->feature?->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$unit?->feature?->kitchen }}</span> </div>
+                <a class="btn btn-primary"  href="{{route('propertydetail', $unit?->id)}}" >View Details</a>
             </div>
             @php $count++; @endphp
         @endforeach

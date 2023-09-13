@@ -15,7 +15,7 @@ class FeatureFactory extends Factory
             'living_rooms' => fake()->numberBetween(0, 4),
             'bathroom' => fake()->numberBetween(0, 4),
             'kitchen' => fake()->numberBetween(0, 4),
-            'unit_id' => fake()->unique()->numberBetween($min = 1, $max = 1000),
+            'unit_id' => fake()->unique()->numberBetween($min = 16, $max = 1017),
 
         ];
     }

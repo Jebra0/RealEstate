@@ -16,8 +16,8 @@ class UnitFactory extends Factory
             'for_what' => fake()->randomElement($for),
             'date_of_posting' => fake()->date(),
             'is_available' => fake()->boolean(),
-            'posted_by' => fake()->numberBetween($min = 1, $max = 500),
-            'parent_unit_id' => fake()->numberBetween($min = 1, $max = 250),
+            'posted_by' => fake()->numberBetween($min = 521, $max = 771),
+            'parent_unit_id' => fake()->numberBetween($min = 1002, $max = 1252),
         ];
     }
 }
