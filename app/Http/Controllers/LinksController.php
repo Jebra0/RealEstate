@@ -23,6 +23,10 @@ class LinksController extends Controller
 {
     use UbloadImagesTrait;
 
+    public function test(User $user){
+        return $user->id;
+    }
+
     public function index()
     {
         // get all images and the feature of it , user , parent
@@ -164,6 +168,12 @@ class LinksController extends Controller
         DB::table('units')->where('id', $id)->update(['is_available' => 0 ]);
         return redirect()->back();
     }
+
+    public function available($id){
+        DB::table('units')->where('id', $id)->update(['is_available' => 1 ]);
+        return redirect()->back();
+    }
+
     public function delet_unit($id){
         feature::where('unit_id', $id)->delete($id);
         Image::where('unit_id', $id)->delete($id);

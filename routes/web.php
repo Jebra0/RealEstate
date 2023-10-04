@@ -23,6 +23,11 @@ Route::controller(BuySaleController::class)->group(function() {
 });
 
 Route::controller(LinksController::class)->group(function() {
+    //testing routes
+    Route::get('/test{user}', 'test');
+
+
+    //end testing route
     Route::get('/', 'index')->name('index');
     Route::get('/about', 'about')->name('about');
     Route::get('/agents', 'agents')->name('agents');
@@ -35,6 +40,7 @@ Route::controller(LinksController::class)->group(function() {
     Route::any('/report{id}', 'ReportUnit')->name('report');
     Route::any('/notifications{id}', 'displayTheTargitPost')->name('notification');
     Route::any('/sold{id}', 'sold')->name('sold');
+    Route::any('/available{id}', 'available')->name('available');
     Route::any('/deletUnit{id}', 'delet_unit')->name('delet_unit');
     Route::any('/update{id}', 'updateUnit')->name('ubdate');
     Route::any('/show{id}', 'showUnit')->name('show');

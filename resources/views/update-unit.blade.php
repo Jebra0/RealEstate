@@ -12,7 +12,7 @@
         <div class="row" style="margin: 10px;">
             <form method="POST" action="{{route('ubdate', $unit->id)}}" enctype="multipart/form-data">
                 @csrf
-                @method('post')
+                @method('PUT')
 
                 <div class="form-group input-group-lg col-lg-12 col-sm-12">
                     <label for="description">Description:</label>

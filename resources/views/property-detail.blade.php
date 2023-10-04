@@ -54,7 +54,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                        <li>
                            @auth()
-                               @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 1)
+                               @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() /*&& $currentUnit->is_available == 1*/)
                                    <a href="{{route('show', $currentUnit->id)}}">
                                        Edit the post
                                    </a>
@@ -66,6 +66,14 @@
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 1)
                                     <a href="{{ route('sold', $currentUnit->id) }}"   >
                                         Mark as Sold
+                                    </a>
+                                @endif
+                            @endauth
+
+                            @auth()
+                                @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 0)
+                                    <a href="{{ route('available', $currentUnit->id) }}"   >
+                                        Return It Available
                                     </a>
                                 @endif
                             @endauth
@@ -85,9 +93,13 @@
                         <li style="margin-left: 42px; margin-top: 8px; width: 50%;">
                             @auth()
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id())
-                                    <a href="{{ route('delet_unit', $currentUnit->id) }}" type="button" class="btn btn-danger" >
-                                        Delete
-                                    </a>
+                                    <form method="POST" action="{{route('delet_unit', $currentUnit->id)}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-danger" >
+                                            Delete
+                                        </button>
+                                    </form>
                                 @endif
                             @endauth
                         </li>
@@ -183,7 +195,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
