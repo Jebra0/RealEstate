@@ -23,28 +23,7 @@ class LinksController extends Controller
 {
     use UbloadImagesTrait;
 
-    public function test(User $user){
-        return $user->id;
-    }
-
-    public function index()
-    {
-        // get all images and the feature of it , user , parent
-        $units = Unit::with('images', 'feature', 'user', 'parent')->limit(20)->get();
-        $title = 'Home';
-        return view('index', compact('units', 'title'));
-    }
-    public function about()
-    {
-        $title = 'About';
-        return view('about', compact('title'));
-    }
-    public function agents()
-    {
-        $title = 'agents';
-        return view('agents', compact('title'));
-    }
-    public function salerent()
+    public function salerent() //form
     {
         $title = 'Sale Or Rent';
         return view('salerent', compact('title'));
@@ -117,24 +96,6 @@ class LinksController extends Controller
         }
 
         return redirect('/');
-    }
-
-    public function contact()
-    {
-        $title = 'Contact';
-        return view('contact', compact('title'));
-    }
-
-    public function blogdetail()
-    {
-        return view('blogdetail');
-    }
-    public function property_detail($id)
-    {
-        $title = 'Prosperity Details';
-        $units = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
-        return view('property-detail', compact('units', 'title', 'id'));
-
     }
 
     public function ReportUnit(Request $request, $id){

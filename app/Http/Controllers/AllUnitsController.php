@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 
-class BuySaleController extends Controller
+class AllUnitsController extends Controller
 {
-    public function buysalerent()
+    public function units()
     {
 
-        $title = 'Buy Or Rent';
-        $units =  Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
-        $AllUnits = Unit::count();
-        $Result = Unit::with('images', 'feature', 'user', 'parent')->paginate(15);
         $by = 'asc';
-        return view('buysalerent', compact(
+        $title = 'Units';
+        $AllUnits = Unit::count();
+
+        $units =  Unit::with('images', 'feature', 'user', 'parent')
+                  ->orderBy('price', 'asc')
+                  ->limit(5)->get();
+
+        $Result = Unit::with('images', 'feature', 'user', 'parent')->paginate(15);
+
+        return view('units', compact(
             'units',
             'AllUnits',
             'Result',
@@ -23,17 +29,17 @@ class BuySaleController extends Controller
             'title',
         ));
     }
+
     public function search(Request $request)
     {
-//#############################################################################################
-// #########################   :(  ملعون ابو السيرش علي الي عاوزه     ##############################
-//##########################       :) تعديل : خلاص السيرش حلو           ###########################
-//##########################       تعديل :  ملعون ابو السيرش            ###########################
-//################################################################################################
 
-        $units =  Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
         $AllUnits = Unit::count();
         $by = 'asc';
+
+        $units =  Unit::with('images', 'feature', 'user', 'parent')
+            ->orderBy('price', 'asc')
+            ->limit(5)
+            ->get();
 
         $for = $request->input('for');
         $price = $request->input('price');
@@ -42,7 +48,8 @@ class BuySaleController extends Controller
         $city = $request->input('city');
         $name = $request->input('name');
 
-        $Result = Unit::with('images', 'feature', 'user', 'parent')->where('for_what', $for)
+        $Result = Unit::with('images', 'feature', 'user', 'parent')
+            ->where('for_what', $for)
             ->where('price', '<=', $price)
             ->orwhere('type', $type)
             ->orWhereHas('parent', function ($query) use ($state, $city, $name) {
@@ -52,9 +59,9 @@ class BuySaleController extends Controller
             })
             ->paginate(15);
 
-        $title = 'Buy Or Rent ';
+        $title = 'Search';
 
-        return view('buysalerent', compact(
+        return view('units', compact(
             'units',
             'AllUnits',
             'Result',
@@ -62,13 +69,14 @@ class BuySaleController extends Controller
             'title',
         ));
     }
-    public function sortData(Request $request)
+
+    public function sort(Request $request)
     {
-        $title = 'Buy Or Rent';
+        $title = 'Units';
         $by = $request->input('sort', 'asc');
         $units = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', 'asc')->limit(5)->get();
         $AllUnits = Unit::count();
         $Result = Unit::with('images', 'feature', 'user', 'parent')->orderBy('price', $by)->paginate(15);
-        return view('buysalerent', compact('Result', 'units', 'AllUnits', 'by', 'title'));
+        return view('units', compact('Result', 'units', 'AllUnits', 'by', 'title'));
     }
 }

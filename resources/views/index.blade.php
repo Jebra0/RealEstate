@@ -92,7 +92,7 @@
 
 <!-- banner -->
 <div class="container">
-  <div class="properties-listing spacer"> <a href="{{route('buysalerent')}}" class="pull-right viewall">View All Listing</a>
+  <div class="properties-listing spacer"> <a href="{{route('units')}}" class="pull-right viewall">View All Listing</a>
     <h2>Featured Properties</h2>
     <div id="owl-example" class="owl-carousel">
         @php $count = 0; @endphp
