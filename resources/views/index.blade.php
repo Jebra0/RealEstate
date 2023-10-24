@@ -39,20 +39,21 @@
     <!-- banner -->
     <h3>Buy, Sale & Rent</h3>
     <div class="searchbar">
-         <form method="Get" action="{{route('search')}}">
+         <form method="POST" action="{{route('search')}}">
              @csrf
+             @method('POST')
              <div class="row">
                  <div class="col-lg-6 col-sm-6">
                      <div class="row">
                          <div class="col-lg-3 col-sm-3 ">
-                             <select id="for" name="for" class="form-control">
+                             <select onclick="return false;" id="for" name="for" class="form-control">
                                  <option>for what</option>
                                  <option value="sale" >Buy</option>
                                  <option value="rent">Rent</option>
                              </select>
                          </div>
                          <div class="col-lg-3 col-sm-3">
-                             <select id="price" name="price" class="form-control">
+                             <select onclick="return false;" id="price" name="price" class="form-control">
                                  <option>Price</option>
                                  <option value="100000"> less than $50,000</option>
                                  <option value="50000">less than $30,000</option>
@@ -61,7 +62,7 @@
                              </select>
                          </div>
                          <div class="col-lg-3 col-sm-3">
-                             <select id="type" name="type" class="form-control">
+                             <select onclick="return false;" id="type" name="type" class="form-control">
                                  <option>type</option>
                                  <option value="appartment">Apartment</option>
                                  <option value="sallon" >Salon</option>
@@ -71,16 +72,18 @@
                      </div>
                      <div class="row">
                          <div class="col-lg-3 col-sm-3 ">
-                             <input name="state" type="text" class="form-control" placeholder="State Name">
+                             <input onclick="return false;" name="state" type="text" class="form-control" placeholder="State Name">
                          </div>
                          <div class="col-lg-3 col-sm-3 ">
-                             <input name="city" type="text" class="form-control" placeholder="City Name">
+                             <input onclick="return false;" name="city" type="text" class="form-control" placeholder="City Name">
                          </div>
                          <div class="col-lg-3 col-sm-3 ">
-                             <input name="name" type="text" class="form-control" placeholder="Property Name">
+                             <input onclick="return false;" name="name" type="text" class="form-control" placeholder="Property Name">
                          </div>
-                         <div class="  col-lg-3 col-sm-3 ">
-                             <button class=" btn btn-success"  onclick="window.location.href='{{route('search')}}'">Find Now</button>
+                     </div>
+                     <div class="row">
+                         <div class=" col-lg-9 col-sm-3 ">
+                             <input type="submit" class=" btn btn-success" >
                          </div>
                      </div>
                  </div>

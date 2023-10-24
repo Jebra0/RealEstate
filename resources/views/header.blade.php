@@ -97,14 +97,15 @@
                 <div class="dropdown pull-right ">
                     <div  class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
                         <h4 style="color: #72B70F; font-weight: bolder;">
-                            {{ Auth::user()->name }}
+                {{--              to get the first name only                  --}}
+                            {{ explode(' ', Auth::user()->name)[0] }}
                             <span class="caret"></span>
                         </h4>
                     </div>
                     <ul class="dropdown-menu m-0" aria-labelledby="dropdownMenu1">
                         <li><a href="{{route('profile.edit')}}"> {{ __('Profile') }}</a></li>
-                        <li><a href="{{route('buysalerent')}}">Buy</a></li>
-                        <li><a href="{{route('salerent')}}">Sale / Rent</a></li>
+                        <li><a href="{{route('units')}}">Units</a></li>
+                        <li><a href="{{route('salerent')}}">Upload Unit</a></li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <li><a style="color: black; margin-left: 19px;" href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();"> {{ __('Log Out') }}</a></li>

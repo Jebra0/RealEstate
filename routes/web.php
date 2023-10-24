@@ -30,20 +30,27 @@ Route::controller(\App\Http\Controllers\ProperityDetailsController::class)->grou
 });
 
 //All Units and Search
-//###### when i touch the search form it redirect me to blog details why?????????
 Route::controller(\App\Http\Controllers\AllUnitsController::class)->group(function (){
     Route::get('/units', 'units')->name('units');
-    Route::get('/units/search', 'search')->name('search');
-    Route::get('/units/sorted', 'sort')->name('sortData');
+    Route::POST('/search', 'search')->name('search');
+    Route::get('/sorted', 'sort')->name('sortData');
 });
 
+//Report controller
+Route::controller(\App\Http\Controllers\ReportController::class)->group(function (){
+    Route::POST('/report/{id}', 'ReportUnit')->middleware('auth')->name('report');
+});
+
+//upload unit
+Route::controller(\App\Http\Controllers\SaleController::class)->group(function () {
+    Route::GET('/add-unit', 'AdddUnit')->middleware('auth')->name('salerent');
+    Route::POST('/units/ubload', 'store')->name('unit.upload');
+});
 
 //end the re routing
 
 Route::controller(LinksController::class)->group(function() {
-    Route::any('/salerent', 'salerent')->name('salerent');
-    Route::any('/salerent/ubload', 'ubload')->name('ubload');
-    Route::any('/report{id}', 'ReportUnit')->name('report');
+
     Route::any('/notifications{id}', 'displayTheTargitPost')->name('notification');
     Route::any('/sold{id}', 'sold')->name('sold');
     Route::any('/available{id}', 'available')->name('available');

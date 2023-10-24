@@ -80,13 +80,22 @@
                         </li>
 
                         <li role="separator" class="divider"></li>
-
+    {{--
+           ##############################################################################
+           #### Report unit
+           #### IsReported() function is a helper function to check if that user hase already report the unit before or not
+           ##############################################################################
+            --}}
                         <li style="margin-left: 42px; margin-top: 8px; width: 50%;">
                             @auth()
                                 @if($currentUnit->user->id != \Illuminate\Support\Facades\Auth::id())
-                                    <button {{ IsReported($currentUnit->id) ? 'disabled' : ''}} type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmReportModal">
-                                        Report
-                                    </button>
+                                    <form method="POST" action="{{ route('report', $currentUnit->id) }}">
+                                        @csrf
+                                        @method('POST')
+                                        <button  onclick="return confirm('are you sure?')"  {{ IsReported($currentUnit->id) ? 'disabled' : ''}} type="submit" class="btn btn-danger">
+                                            Report
+                                        </button>
+                                    </form>
                                 @endif
                             @endauth
                         </li>
@@ -162,38 +171,6 @@
                             </div>
                             <h6><span class="glyphicon glyphicon-home"></span> Availabilty</h6>
                             <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $currentUnit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$currentUnit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $currentUnit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$currentUnit->feature->kitchen }}</span> </div>
-                        </div>
-        {{--
-       ##############################################################################
-       #### Report unit
-       #### IsReported() function is a helper function to check if that user hase already report the unit before or not
-       ##############################################################################
-        --}}
-                        <!-- Button trigger modal -->
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="confirmReportModal" tabindex="-1" role="dialog" aria-labelledby="confirmReportModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmReportModalLabel">Confirm Report</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to report this?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <form method="POST" action="{{ route('report', $currentUnit->id) }}">
-                                            @csrf
-                                            <input type="hidden" name="confirmed" value="true">
-                                            <button type="submit" class="btn btn-danger">Report</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

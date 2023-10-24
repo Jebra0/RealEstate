@@ -16,8 +16,9 @@
             <div class="col-lg-3 col-sm-4 ">
 
                 <div class="search-form"><h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-                   <form action="{{route('search')}}" method="GET">
+                   <form action="{{route('search')}}" method="POST">
                        @csrf
+                       @method('POST')
                        <input name="state" type="text" class="form-control" placeholder="State Name">
                        <input name="city" type="text" class="form-control" placeholder="City Name">
                        <input name="name" type="text" class="form-control" placeholder="Property Name">
