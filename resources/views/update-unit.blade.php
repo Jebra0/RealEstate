@@ -10,7 +10,7 @@
 <div class="container " >
     <div class="spacer " >
         <div class="row" style="margin: 10px;">
-            <form method="POST" action="{{route('ubdate', $unit->id)}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('Units.update', $unit->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -88,7 +88,7 @@
                         @foreach($unit->images as $image)
                             <div class="image-holder"><img src="images/{{$image->imag}}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
                                 @if(count($unit->images) > 1)
-                                    <a href="{{route('delete_image', $image->id)}}"><div class="status new" style=" text-align: center; width: 205px; color: white;">Delete</div></a>
+                                    <a href="{{route('delete.image', $image->id)}}"><div class="status new" style=" text-align: center; width: 205px; color: white;">Delete</div></a>
                                 @endif
                             </div>
                         @endforeach

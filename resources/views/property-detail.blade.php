@@ -19,10 +19,10 @@
                     @foreach($units as $unit )
                         <div class="row">
                             <div class="col-lg-4 col-sm-5">
-                                <img src="{{isset($unit->images->first()->imag) ? 'images/'.$unit->images->first()->imag :'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg' }}" class="img-responsive img-circle" alt="properties"/>
+                                <img src="{{Str::startsWith($unit->images->first()->imag, 'Units') ?asset('images/'.$unit->images->first()->imag ): $unit->images->first()->imag }}" class="img-responsive img-circle" alt="properties"/>
                             </div>
                             <div class="col-lg-8 col-sm-7">
-                                <h5><a href="{{route('propertydetail', $unit->id)}}">{{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</a></h5>
+                                <h5><a href="{{route('Units.show', $unit->id)}}">{{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</a></h5>
                                 <p class="price">${{$unit->price}}</p>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                        <li>
                            @auth()
                                @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() /*&& $currentUnit->is_available == 1*/)
-                                   <a href="{{route('show', $currentUnit->id)}}">
+                                   <a href="{{route('Units.edit', $currentUnit->id)}}">
                                        Edit the post
                                    </a>
                                @endif
@@ -64,7 +64,7 @@
                         <li>
                             @auth()
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 1)
-                                    <a href="{{ route('sold', $currentUnit->id) }}"   >
+                                    <a href="{{ route('mark.sold', $currentUnit->id) }}"   >
                                         Mark as Sold
                                     </a>
                                 @endif
@@ -72,7 +72,7 @@
 
                             @auth()
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 0)
-                                    <a href="{{ route('available', $currentUnit->id) }}"   >
+                                    <a href="{{ route('mark.available', $currentUnit->id) }}"   >
                                         Return It Available
                                     </a>
                                 @endif
@@ -102,7 +102,7 @@
                         <li style="margin-left: 42px; margin-top: 8px; width: 50%;">
                             @auth()
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id())
-                                    <form method="POST" action="{{route('delet_unit', $currentUnit->id)}}">
+                                    <form method="POST" action="{{route('Units.destroy', $currentUnit->id)}}">
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="return confirm('are you sure?')" type="submit" class="btn btn-danger" >
@@ -132,8 +132,9 @@
                                     <!-- Item 1 -->
                                     @for($i = 0; $i < count($currentUnit->images); $i++)
                                         <div class="item @if($i == 0) {{$active}} @endif">
-                                            <img src="images/{{$currentUnit->images[$i]->imag}}" class="properties" alt="properties">
+                                            <img src="{{ Str::startsWith($currentUnit->images[$i]->imag, 'Units') ? asset('images/'.$currentUnit->images[$i]->imag ) : $currentUnit->images[$i]->imag}}" class="properties" alt="properties">
                                         </div>
+
                                     @endfor
                                     <!-- #Item 1 -->
                                 </div>
@@ -146,7 +147,7 @@
 
                         <div class="spacer"><h4><span class="glyphicon glyphicon-th-list"></span> Properties Detail</h4>
                             <p>{{$currentUnit->description}}</p>
-                            <p>{{$currentUnit->type . " ". $currentUnit->feature->bedrooms . " Bedroom " . $currentUnit->feature->living_rooms . " living Room ". $currentUnit->feature->kitchen . " kitchen " ." for " .$currentUnit->for_what . " posted in : " . $currentUnit->date_of_posting}}</p>
+                            <p>{{$currentUnit->type . " ". isset($currentUnit->feature->bedrooms). " Bedroom " . $currentUnit->feature->living_rooms . " living Room ". $currentUnit->feature->kitchen . " kitchen " ." for " .$currentUnit->for_what . " posted in : " . $currentUnit->date_of_posting}}</p>
                         </div>
 {{--################################################################################
 #### still the location

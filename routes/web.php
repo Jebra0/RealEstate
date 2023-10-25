@@ -1,12 +1,10 @@
 <?php
 
-use App\Http\Controllers\LinksController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UnitController;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -14,51 +12,48 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//start the re routing
-//Home
-Route::controller(\App\Http\Controllers\IndexController::class)->group(function (){
-    Route::get('/', 'index')->name('index');
-    Route::get('/about', 'about')->name('about');
-    Route::get('/agents', 'agents')->name('agents');
-    Route::get('/contact', 'contact')->name('contact');
+Route::get('/', function () {
+
+    $title = 'Home';
+    $units = Unit::with('images', 'feature', 'user', 'parent')->limit(20)->get();
+    return view('index', compact('units', 'title'));
+
+})->name('index');
+
+Route::get('/about', function(){
+
+    $title = 'About';
+    return view('about', compact('title'));
+
+})->name('about');
+
+Route::get('/agents', function(){
+
+    $title = 'agents';
+    return view('agents', compact('title'));
+
+})->name('agents');
+
+Route::get('/contact', function(){
+    $title = 'Contact';
+    return view('contact', compact('title'));
+})->name('contact');
+
+Route::resource('Units', UnitController::class);
+
+Route::controller(UnitController::class)->group(function (){
+
+    Route::post('/units-search', 'search')->name('units.search');
+    Route::get('/delete-image/{id}', 'delete_unit_image')->name('delete.image'); // transform it to post + route model binding
+    Route::get('/mark-sold/{id}', 'mark_as_sold')->name('mark.sold'); // transform it to post + route model binding
+    Route::get('/mark-available/{id}', 'mark_as_available')->name('mark.available');
+    Route::get('/sort-units', 'sort_units')->name('sort.units'); // it is get ok
 
 });
 
-//Property details
-Route::controller(\App\Http\Controllers\ProperityDetailsController::class)->group(function (){
-    Route::get('/property_detail{id}', 'property_detail')->name('propertydetail');
-});
-
-//All Units and Search
-Route::controller(\App\Http\Controllers\AllUnitsController::class)->group(function (){
-    Route::get('/units', 'units')->name('units');
-    Route::POST('/search', 'search')->name('search');
-    Route::get('/sorted', 'sort')->name('sortData');
-});
-
-//Report controller
-Route::controller(\App\Http\Controllers\ReportController::class)->group(function (){
-    Route::POST('/report/{id}', 'ReportUnit')->middleware('auth')->name('report');
-});
-
-//upload unit
-Route::controller(\App\Http\Controllers\SaleController::class)->group(function () {
-    Route::GET('/add-unit', 'AdddUnit')->middleware('auth')->name('salerent');
-    Route::POST('/units/ubload', 'store')->name('unit.upload');
-});
-
-//end the re routing
-
-Route::controller(LinksController::class)->group(function() {
-
-    Route::any('/notifications{id}', 'displayTheTargitPost')->name('notification');
-    Route::any('/sold{id}', 'sold')->name('sold');
-    Route::any('/available{id}', 'available')->name('available');
-    Route::any('/deletUnit{id}', 'delet_unit')->name('delet_unit');
-    Route::any('/update{id}', 'updateUnit')->name('ubdate');
-    Route::any('/show{id}', 'showUnit')->name('show');
-    Route::any('/deleteImage{id}', 'delete_image')->name('delete_image');
-
+Route::controller(ReportController::class)->group(function (){
+    Route::POST('/report/{id}', 'report')->name('report'); // rout model binding
+    Route::GET('/report/{id}', 'show')->name('reported-unit'); // rout model binding
 });
 
 require __DIR__.'/auth.php';

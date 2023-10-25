@@ -11,7 +11,7 @@
                       <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
                           <div class="sl-slide-inner">
                               <div class="bg-img bg-img-1"></div>
-                              <h2><a href="{{route('propertydetail', $unit?->id)}}"{{ $unit?->feature?->bedrooms . " Bedrooms " . $unit?->feature?->living_rooms . " Living Room " . $unit?->feature?->bathroom . "  Bathroom " . $unit?->feature?->kitchen ." kitchen"  }}</a></h2>
+                              <h2><a href="{{route('Units.show', $unit?->id)}}"{{ $unit?->feature?->bedrooms . " Bedrooms " . $unit?->feature?->living_rooms . " Living Room " . $unit?->feature?->bathroom . "  Bathroom " . $unit?->feature?->kitchen ." kitchen"  }}</a></h2>
                               <blockquote>
                                   <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{$unit?->parent?->state_name . " " . $unit?->parent?->city_name . " " . $unit?->parent?->street_name . " " . $unit?->parent?->parent_name . " "}}</p>
                                   <p>{{$unit?->date_of_posting}}</p>
@@ -39,7 +39,7 @@
     <!-- banner -->
     <h3>Buy, Sale & Rent</h3>
     <div class="searchbar">
-         <form method="POST" action="{{route('search')}}">
+         <form method="POST" action="{{route('units.search')}}">
              @csrf
              @method('POST')
              <div class="row">
@@ -95,7 +95,7 @@
 
 <!-- banner -->
 <div class="container">
-  <div class="properties-listing spacer"> <a href="{{route('units')}}" class="pull-right viewall">View All Listing</a>
+  <div class="properties-listing spacer"> <a href="{{route('Units.index')}}" class="pull-right viewall">View All Listing</a>
     <h2>Featured Properties</h2>
     <div id="owl-example" class="owl-carousel">
         @php $count = 0; @endphp
@@ -111,10 +111,10 @@
                       <div class="status new">Sold</div>
                     @endif
                 </div>
-                <h4><a href="{{route('propertydetail' , $unit?->id)}}">{{$unit?->type}}</a></h4>
+                <h4><a href="{{route('Units.show' , $unit?->id)}}">{{$unit?->type}}</a></h4>
                 <p class="price">Price: ${{$unit?->price}}</p>
                 <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $unit?->feature?->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$unit?->feature?->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $unit?->feature?->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$unit?->feature?->kitchen }}</span> </div>
-                <a class="btn btn-primary"  href="{{route('propertydetail', $unit?->id)}}" >View Details</a>
+                <a class="btn btn-primary"  href="{{route('Units.show', $unit?->id)}}" >View Details</a>
             </div>
             @php $count++; @endphp
         @endforeach

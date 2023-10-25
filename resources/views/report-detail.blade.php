@@ -31,7 +31,7 @@
                         <li>
                             @auth()
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 1)
-                                    <a href="{{route('show', $currentUnit->id)}}">
+                                    <a href="{{route('Units.edit', $currentUnit->id)}}">
                                         Edit the post
                                     </a>
                                 @endif
@@ -40,7 +40,7 @@
                         <li>
                             @auth()
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id() && $currentUnit->is_available == 1)
-                                    <a href="{{ route('sold', $currentUnit->id) }}"   >
+                                    <a href="{{ route('mark.sold', $currentUnit->id) }}"   >
                                         Mark as Sold
                                     </a>
                                 @endif
@@ -61,7 +61,7 @@
                         <li style="margin-left: 42px; margin-top: 8px; width: 50%;">
                             @auth()
                                 @if($currentUnit->user->id == \Illuminate\Support\Facades\Auth::id())
-                                    <a href="{{ route('delet_unit', $currentUnit->id) }}" type="button" class="btn btn-danger" >
+                                    <a href="{{ route('Units.destroy', $currentUnit->id) }}" type="button" class="btn btn-danger" >
                                         Delete
                                     </a>
                                 @endif

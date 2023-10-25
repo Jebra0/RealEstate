@@ -79,12 +79,12 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('buysalerent')">
-                            {{ __('Buy') }}
+                        <x-dropdown-link :href="route('Units.index')">
+                            {{ __('Units') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('salerent')">
-                            {{ __('Sale / Rent') }}
+                            {{ __('Upload Unit') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -132,12 +132,12 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
-                <x-dropdown-link :href="route('buysalerent')">
-                    {{ __('Buy') }}
+                <x-dropdown-link :href="route('Units.index')">
+                    {{ __('Units') }}
                 </x-dropdown-link>
 
                 <x-dropdown-link :href="route('salerent')">
-                    {{ __('Sale / Rent') }}
+                    {{ __('Upload Unit') }}
                 </x-dropdown-link>
 
                 <!-- Authentication -->

@@ -10,7 +10,7 @@
 <div class="container " >
     <div class="spacer " >
         <div class="row" style="margin: 10px;">
-            <form method="POST" action="{{route('unit.upload')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('Units.store')}}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 {{--Description--}}

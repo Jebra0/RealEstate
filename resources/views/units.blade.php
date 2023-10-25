@@ -16,7 +16,7 @@
             <div class="col-lg-3 col-sm-4 ">
 
                 <div class="search-form"><h4><span class="glyphicon glyphicon-search"></span> Search for</h4>
-                   <form action="{{route('search')}}" method="POST">
+                   <form action="{{route('units.search')}}" method="POST">
                        @csrf
                        @method('POST')
                        <input name="state" type="text" class="form-control" placeholder="State Name">
@@ -64,7 +64,7 @@
                                 <img src="{{isset($unit->images->first()->imag )? 'images/'. $unit->images->first()->imag: 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg'}}"   class="img-responsive img-circle" alt="properties"/>
                             </div>
                             <div class="col-lg-8 col-sm-7">
-                                <h5><a href="{{route('propertydetail', $unit->id)}}">{{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</a></h5>
+                                <h5><a href="{{route('Units.show', $unit->id)}}">{{$unit->parent->state_name . " " . $unit->parent->city_name . " " . $unit->parent->street_name . " " . $unit->parent->parent_name . " "}}</a></h5>
                                 <p class="price">${{$unit->price}}</p>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
             <div class="col-lg-9 col-sm-8">
                 <div class="sortby clearfix">
                     <div class="pull-left result">Showing: {{count($Result)}} </div>
-                    <form method="GET" action="{{route('sortData')}}" class="pull-right">
+                    <form method="GET" action="{{route('sort.units')}}" class="pull-right">
                         <label>
                             <input type="radio" name="sort" value="asc"  {{ isset($by) && $by =='asc'  ? 'checked' : '' }}>
                             Price: Low to High
@@ -110,10 +110,10 @@
                                             <div class="status new">Sold</div>
                                         @endif
                                     </div>
-                                    <h4><a href="{{route('propertydetail', $unit->id)}}">{{$unit->type}}</a></h4>
+                                    <h4><a href="{{route('Units.show', $unit->id)}}">{{$unit->type}}</a></h4>
                                     <p class="price">Price: ${{$unit->price}}</p>
                                     <div class="listing-detail"><span data-toggle="tooltip" data-placement="bottom" data-original-title="Bed Room">{{ $unit->feature->bedrooms}}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Living Room">{{$unit->feature->living_rooms }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Bathroom">{{ $unit->feature->bathroom }}</span> <span data-toggle="tooltip" data-placement="bottom" data-original-title="Kitchen">{{$unit->feature->kitchen }}</span> </div>
-                                    <a class="btn btn-primary"  href="{{route('propertydetail', $unit->id)}}" >View Details</a>
+                                    <a class="btn btn-primary"  href="{{route('Units.show', $unit->id)}}" >View Details</a>
                                 </div>
                             </div>
                             @php $count++; @endphp

@@ -4,28 +4,20 @@
     <meta charset="UTF-8" />
     <title>{{$title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/style.css"/>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="{{ asset('assets/bootstrap/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/script.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{asset('assets/style.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- Owl stylesheet -->
     <link rel="stylesheet" href="assets/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="assets/owl-carousel/owl.theme.css">
-    <script src="{{ asset('assets/owl-carousel/owl.carousel.js') }}"></script>
     <!-- Owl stylesheet -->
-
 
 <!-- slitslider -->
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/style.css" />
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/custom.css" />
-    <script type="text/javascript" src="{{ asset('assets/slitslider/js/modernizr.custom.79639.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/slitslider/js/jquery.ba-cond.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/slitslider/js/jquery.slitslider.js') }}"></script>
 <!-- slitslider -->
-
-
 
    <style>
         .notification {
@@ -46,10 +38,7 @@
             font-size: 10px;
             border-radius: 50%;
         }
-
-
     </style>
-
 </head>
 
 <body>
@@ -90,9 +79,7 @@
     <div class="container">
     <!-- Header Starts -->
         <div class="header">
-
             <a href="{{route('index')}}"><img style="width: 171px" src="{{ asset('images/logo.jpeg') }}" alt="Realestate"></a>
-
             @auth()
                 <div class="dropdown pull-right ">
                     <div  class="dropdown-toggle"  id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
@@ -104,8 +91,8 @@
                     </div>
                     <ul class="dropdown-menu m-0" aria-labelledby="dropdownMenu1">
                         <li><a href="{{route('profile.edit')}}"> {{ __('Profile') }}</a></li>
-                        <li><a href="{{route('units')}}">Units</a></li>
-                        <li><a href="{{route('salerent')}}">Upload Unit</a></li>
+                        <li><a href="{{route('Units.index')}}">Units</a></li>
+                        <li><a href="{{route('Units.create')}}">Upload Unit</a></li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <li><a style="color: black; margin-left: 19px;" href="{{route('logout')}}" onclick="event.preventDefault();this.closest('form').submit();"> {{ __('Log Out') }}</a></li>
@@ -133,7 +120,7 @@
                     <ul class="dropdown-menu m-0" aria-labelledby="dropdownMenu1" >
                         <center><a>Mark As Read </a></center>
                         @foreach(Auth::user()->unreadNotifications as $notification)
-                           <li><a href="{{route('notification', $notification->data['unit_id'])}}" style="text-transform: lowercase;">{{GetUser($notification->data['reported_user'])->name}} Reported on your post .</a></li>
+                           <li><a href="{{route('reported-unit', $notification->data['unit_id'])}}" style="text-transform: lowercase;">{{GetUser($notification->data['reported_user'])->name}} Reported on your post .</a></li>
                         @endforeach
                     </ul>
             </div>
@@ -146,7 +133,6 @@
                         <a  href="{{ route('register') }}" class="btn btn-info" >Register</a>
                 </div>
             @endguest
-
         </div>
     <!-- #Header Starts -->
     </div>
