@@ -23,7 +23,7 @@ trait UbloadImagesTrait
             foreach ($images as $image) {
 
                 $name = $image->getClientOriginalName();
-                $path[] = $image->storeAs($folderName, 'UNIT' . $name, 'AllImages');
+                $path[] = $image->storeAs($folderName, 'UNIT_'.$name, 'AllImages');
 
             }
 

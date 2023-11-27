@@ -64,7 +64,7 @@
 
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ explode(' ', Auth::user()->name)[0] }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -83,7 +83,7 @@
                             {{ __('Units') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('salerent')">
+                        <x-dropdown-link :href="route('Units.create')">
                             {{ __('Upload Unit') }}
                         </x-dropdown-link>
 
@@ -115,8 +115,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
 
@@ -136,7 +136,7 @@
                     {{ __('Units') }}
                 </x-dropdown-link>
 
-                <x-dropdown-link :href="route('salerent')">
+                <x-dropdown-link :href="route('Units.create')">
                     {{ __('Upload Unit') }}
                 </x-dropdown-link>
 

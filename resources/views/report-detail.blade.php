@@ -87,7 +87,7 @@
                                     <!-- Item 1 -->
                                     @for($i = 0; $i < count($currentUnit->images); $i++)
                                         <div class="item @if($i == 0) {{$active}} @endif">
-                                            <img src="images/{{$currentUnit->images[$i]->imag}}" class="properties" alt="properties">
+                                            <img src="{{asset('images/'.$currentUnit->images[$i]->imag)}}" class="properties" alt="properties">
                                         </div>
                                     @endfor
                                     <!-- #Item 1 -->
