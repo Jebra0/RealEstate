@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="{{asset('assets/style.css')}}"/>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/script.js') }}"></script>
+
+    <script src="{{ asset('assets/owl-carousel/owl.carousel.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/slitslider/js/modernizr.custom.79639.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/slitslider/js/jquery.ba-cond.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/slitslider/js/jquery.slitslider.js') }}"></script>
+
     <!-- Owl stylesheet -->
     <link rel="stylesheet" href="assets/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="assets/owl-carousel/owl.theme.css">
