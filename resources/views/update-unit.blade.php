@@ -86,7 +86,7 @@
                 <div class="col-md-4 input-group ">
                     <div class="col-lg-12 col-sm-12">
                         @foreach($unit->images as $image)
-                            <div class="image-holder"><img src="images/{{$image->imag}}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
+                            <div class="image-holder"><img src="{{asset('images/'.$image->imag)}}" style="height: 153px; width: 205px;" width="205px" height="154px" class="img-responsive" alt="properties"/>
                                 @if(count($unit->images) > 1)
                                     <a href="{{route('delete.image', $image->id)}}"><div class="status new" style=" text-align: center; width: 205px; color: white;">Delete</div></a>
                                 @endif

@@ -12,11 +12,13 @@ class Unit extends Model
 
     protected $fillable = [
         'description',
+        'parent_unit_id',
         'price',
         'type',
         'for_what',
         'date_of_posting',
         'is_available',
+        'posted_by',
     ];
 
     protected $casts = [

@@ -281,20 +281,10 @@ class UnitController extends Controller
      */
     public function destroy(string $id) // /deleteUnit{}
     {
+        //helper function in /App/helper.php
+        Delete_Unit($id);
 
-        feature::where('unit_id', $id)->delete($id);
-
-        $images = Image::where('unit_id', $id)->delete();
-
-//        foreach ($images as $image)
-//        {
-//            Storage::delete($image->image);
-//            $image->delete();
-//        }
-
-        Unit::where('id', $id)->delete($id);
-
-        return redirect()->route('index')->with('success', 'Unit deleted successfully.');
+        return redirect()->route('index');
     }
 
 // un resource methods
