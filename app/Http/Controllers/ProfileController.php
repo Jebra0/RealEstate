@@ -50,6 +50,7 @@ class ProfileController extends Controller
                 //helper function in /App/helper.php
                 Delete_Unit($unit->id);
             }
+            //delete Reports of user.
 
             $user->delete();
         });

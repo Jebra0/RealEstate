@@ -130,7 +130,12 @@
                     <ul class="dropdown-menu m-0" aria-labelledby="dropdownMenu1" >
                         <center><a>Mark As Read </a></center>
                         @foreach(Auth::user()->unreadNotifications as $notification)
-                           <li><a href="{{route('reported-unit', $notification->data['unit_id'])}}" style="text-transform: lowercase;">{{GetUser($notification->data['reported_user'])->name}} Reported on your post .</a></li>
+                            <@php
+                            // becouse if that user delete his account after report did not return error
+                               $reported_user = GetUser($notification->data['reported_user']);
+                             @endphp
+                           <li><a href="{{route('reported-unit', $notification->data['unit_id'])}}" style="text-transform: lowercase;">
+                                   {{isset($reported_user)? $reported_user->name : 'Some User'}} Reported on your post .</a></li>
                         @endforeach
                     </ul>
             </div>
