@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Report;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -51,6 +52,10 @@ class ProfileController extends Controller
                 Delete_Unit($unit->id);
             }
             //delete Reports of user.
+            $reports = DB::table('reports')->where('user_id', Auth::id())->get();
+            foreach ($reports as $report){
+                DB::table('reports')->where('id', $report->id)->delete();
+            }
 
             $user->delete();
         });
